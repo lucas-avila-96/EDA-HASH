@@ -9,14 +9,15 @@ class TablaHash:
     __total = 0
     __contadorOverflow = 0
     __almcPrimario = None
+    __tamanoBucket = 10
 
     def __init__(self, tamano):
-        self.__almcPrimario = self.primoCercano(tamano // 10)
+        self.__almcPrimario = self.primoCercano(tamano // self.__tamanoBucket)
         self.__contadorOverflow = self.__almcPrimario
         self.__total = self.__almcPrimario + int((30 * self.__almcPrimario) // 100)
         self.__tabla = np.empty(self.__total, dtype=Bucket)
         for i in range(self.__total):
-            self.__tabla[i] = Bucket(10)
+            self.__tabla[i] = Bucket(self.__tamanoBucket)
 
     def esPrimo(self, num):
         primo = False
